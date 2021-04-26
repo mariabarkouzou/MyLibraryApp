@@ -11,6 +11,7 @@ const form = document.querySelector("form").addEventListener("submit", (e) => {
   render();
   clearForm();
 });
+
 const table = document
   .querySelector("table")
   .addEventListener("click", (e) => {
@@ -56,14 +57,17 @@ function addBookToLibrary() {
   library.push(newBook);
   updateLocalStorage();
 }
+
 function changeStatus(book) {
   if (library[book].status === "Read") {
     library[book].status = "Not Read";
   } else library[book].status = "Read";
 }
+
 function deleteBook(currentBook) {
   library.splice(currentBook, currentBook + 1);
 }
+
 function findBook(libraryArray, title) {
   if (libraryArray.length === 0 || libraryArray === null) {
     return;
@@ -73,15 +77,17 @@ function findBook(libraryArray, title) {
       return libraryArray.indexOf(book);
     }
 }
+
 function clearForm() {
   title.value = "";
   author.value = "";
   pages.value = "";
 }
+
 function updateLocalStorage() {
   localStorage.setItem("library", JSON.stringify(library));
-  //library = JSON.parse(localStorage.getItem("library"));
 }
+
 function checkLocalStorage() {
   if (localStorage.getItem("library")) {
     library = JSON.parse(localStorage.getItem("library"));
