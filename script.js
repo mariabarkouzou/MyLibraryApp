@@ -1,17 +1,17 @@
 let library;
 
-const $title = document.querySelector("#title");
-const $author = document.querySelector("#author");
-const $pages = document.querySelector("#pages");
-const $status = document.querySelector("#status");
-const $tableBody = document.querySelector("#book-list");
-const $form = document.querySelector("form").addEventListener("submit", (e) => {
+const title = document.querySelector("#title");
+const author = document.querySelector("#author");
+const pages = document.querySelector("#pages");
+const status = document.querySelector("#status");
+const tableBody = document.querySelector("#book-list");
+const form = document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
   addBookToLibrary();
   render();
   clearForm();
 });
-const $table = document
+const table = document
   .querySelector("table")
   .addEventListener("click", (e) => {
     const currentTarget = e.target.parentNode.parentNode.childNodes[1];
@@ -39,18 +39,18 @@ class Book {
 
 function addBookToLibrary() {
   if (
-    $title.value.length === 0 ||
-    $author.value.length === 0 ||
-    $pages.value.length === 0
+    title.value.length === 0 ||
+    author.value.length === 0 ||
+    pages.value.length === 0
   ) {
-    alert("Please, fill all the fields");
+    alert("Please, fill in the fields!");
     return;
   }
   const newBook = new Book(
-    $title.value,
-    $author.value,
-    $pages.value,
-    $status.value
+    title.value,
+    author.value,
+    pages.value,
+    status.value
   );
 
   library.push(newBook);
@@ -74,9 +74,9 @@ function findBook(libraryArray, title) {
     }
 }
 function clearForm() {
-  $title.value = "";
-  $author.value = "";
-  $pages.value = "";
+  title.value = "";
+  author.value = "";
+  pages.value = "";
 }
 function updateLocalStorage() {
   localStorage.setItem("library", JSON.stringify(library));
@@ -92,7 +92,7 @@ function checkLocalStorage() {
 
 function render() {
   checkLocalStorage();
-  $tableBody.innerHTML = "";
+  tableBody.innerHTML = "";
   library.forEach((book) => {
     const htmlBook = `
       <tr>
@@ -103,7 +103,7 @@ function render() {
         <td><button class="delete">Remove</button></td>
       </tr>
       `;
-    $tableBody.insertAdjacentHTML("afterbegin", htmlBook);
+    tableBody.insertAdjacentHTML("afterbegin", htmlBook);
   });
 }
 
